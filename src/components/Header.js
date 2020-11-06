@@ -1,13 +1,26 @@
 import React from 'react';
-import logo from './logo192.png';
+import theme from "../theme/index"
+import styled from 'styled-components';
+
 export default function Header(){
     return (
-        <header className = "App-header">
-            <h1>NASA Photo of the day</h1>
-            <div className = "App-logo">
-                <img src={logo} alt='logo'/>
-            </div>
-        </header>
+        <StyledHeader> 
+        <h1>NASA</h1>
+        <h2>Photo of the day <span role="img" aria-label='go!'>🚀</span></h2>
+           
+        </StyledHeader>
     )
     
 }
+
+const StyledHeader = styled.header`
+display:flex;
+flex-direction:column;
+justify-content:center;
+height: 15vh;
+color: ${theme.nasaWhite};
+background-color: ${theme.nasaBlue};
+h2{
+    color: ${theme.nasaRed}
+}
+`
