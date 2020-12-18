@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import theme from '../theme'
 export default function Image(props){
 const {imageDetails} = props;
 
@@ -9,21 +9,37 @@ const {imageDetails} = props;
         <div>
            <img src = {imageDetails.hdurl} alt = "of the day" width = '100%'/>
         </div>
+        <div>
         <h3>{imageDetails.title}</h3>
         <p>{imageDetails.date}</p>
         <p>{imageDetails.explanation}</p>
+        </div>
         </ImgContainer>
     )
 }
 
 const ImgContainer = styled.div`
+
 display: flex;
-flex-direction: column;
+flex-wrap:wrap;
 justify-content:center;
- h3{
-     margin: 2% 0;
- }
+color: rgb(56,56,56);
+  
  p{
-     margin:1% 0 2% 0;
+  margin-bottom: 2%;
+ }
+
+ h3{
+    padding: 2% 0;
+    width: 100%auto;
+}
+div:hover {
+
+color: ${theme.nasaBlue};
+transition: all .4s ease-in;
+
+}
+ div img{
+     border-radius:5px;
  }
 `

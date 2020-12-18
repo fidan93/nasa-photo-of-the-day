@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import axios from 'axios';
 import Image from './Image';
 import styled from 'styled-components';
-import theme from '../theme/index'
+
 
 export default function ImageDetails (props){
 
@@ -21,7 +21,7 @@ let date = [];
     .get(`
     https://api.nasa.gov/planetary/apod?api_key=sHeucF01mNW1Nhok2YsfaDCv7Xp5aZckjXAxrSra&date=${currentDate}`)
     .then((res) => {
-  
+       console.log(res)
        setNasaData(res.data);
     })
     .catch((err)=>{
@@ -30,9 +30,8 @@ let date = [];
   },[currentDate])
 
   function currentDateSetter(e){
-    let str = e.target.textContent;
-    const str2 = str.split(':');
-    setCurrentDate(str2[1]);
+   
+   setCurrentDate(e.target.value);
   }
 
 
@@ -41,16 +40,16 @@ if (!nasaData.hdurl) return <h3>Loading...</h3>;
     return (
         
         <Main>
-            <Dropdown>
-                <p>Pick the date:</p>
-                <DropdownContent>
+            <div className="custom-select">
+                <select onChange={currentDateSetter}>
+                <option>Pick the date:</option>
             {
             allDates.map(eachDate => {
-              return  <h4 key = {eachDate} onClick = {currentDateSetter}> date:{eachDate} </h4>
+              return  <option key = {eachDate} value = {eachDate} > date: {eachDate} </option>
             })
             }
-            </DropdownContent>
-            </Dropdown>
+            </select>
+            </div>
         <Image imageDetails = {nasaData} />
         </Main>
     )
@@ -60,39 +59,37 @@ display: flex;
 flex-wrap: wrap;
 justify-content: center;
 width:90%;
-margin: 0 auto;
-`
-const DropdownContent = styled.div`
-display: none;
-width: 100%;
-`
-const Dropdown = styled.div`
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-align-items: center;
 margin: 5% auto;
-background-color: ${theme.nasaBlue};
-color: ${theme.nasaWhite};
 
-&:hover ${DropdownContent}{
-    display: flex;
-    flex-direction: column;
-    transition: all .4s ease-in-out;
+select{
+  width:100%;
+  height:100%;
+  background-color: transparent;
+  outline: none;
+  font-size: 1.1rem;
+  position:relative;
+  border: none;
+  color: rgb(56,56,56);
 }
-@media (max-width:800px){
-    width:100%auto;
+
+.custom-select{
+width: 40%;
+border: 1px solid #777;
+border-radius: 0.25rem;
+padding: 0.25em 0.5em;
+background-color:#D0D0D0;
+opacity: 80%;
+align-items:center;
+position:relative;
+margin-bottom:5%;
 }
-p{
-    padding:5%5%;
-}
-h4 {
-    padding: 5% 0;
-    width: 100%auto;
-}
-h4:hover {
-background-color:${theme.nasaRed} ;
-color: ${theme.nasaBlue};
-transition: all .4s ease-in-out;
-}
+
+
+
+
 `
+
+
+
+
+

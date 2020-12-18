@@ -19,8 +19,12 @@ flex-direction:column;
 justify-content:center;
 height: 15vh;
 color: ${theme.nasaWhite};
-background-color: ${theme.nasaBlue};
+background-color: rgba(34, 49, 63, 1);
+opacity: 60%;
 h2{
     color: ${theme.nasaRed}
+}
+&:hover{
+ opacity: 80%
 }
 `
